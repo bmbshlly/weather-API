@@ -57,37 +57,29 @@ app.get('/userWeatherData', async (req, res) => {
     else { res.send('no data found'); }
 });
 
-app.get('/updateWeatherData', (req, res) => {
-    pool.query('SELECT city from current_weather', async (err, res) => {
-        if (err) {
-            console.log(err.stack);
-        } else {
-            const promises = [];
-            for (let data of res.rows) {
-                let city = data.city;
-                promises.push(
-                    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}`)
-                        .then((res) => {
-                            let weather = {};
-                            weather.temp = res.data.main.temp;
-                            weather.description = res.data.weather[0].description;
-                            weather.temp_min = res.data.main.temp_min;
-                            weather.temp_max = res.data.main.temp_max;
-                            weather.wind = res.data.wind;
-                            weather.clouds = res.data.clouds;
-                            weather = JSON.stringify(weather);
-                            pool.query(`UPDATE current_weather SET weather = '${weather}' WHERE city = '${city}'`);
-                        })
-                );
-            }
-            axios.all(promises).catch((err) => console.log(err));
-        }
-    })
-    res.send("updated weather");
+app.get('/updateWeatherData', async (req, res) => {
+    const { rows } = await pool.query('SELECT city from current_weather');
+    const promises = [];
+    for (let data of rows) {
+        let city = data.city;
+        promises.push(
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}`)
+                .then((res) => {
+                    let weather = {};
+                    weather.temp = res.data.main.temp;
+                    weather.description = res.data.weather[0].description;
+                    weather.temp_min = res.data.main.temp_min;
+                    weather.temp_max = res.data.main.temp_max;
+                    weather.wind = res.data.wind;
+                    weather.clouds = res.data.clouds;
+                    weather = JSON.stringify(weather);
+                    pool.query(`UPDATE current_weather SET weather = '${weather}' WHERE city = '${city}'`);
+                })
+        );
+    }
+    axios.all(promises).then(() => res.send("updated weather")).catch((err) => console.log(err));
 });
 
 
 // listen
 app.listen(port, () => console.log(`listening on localhost:${port}`));
-
-
