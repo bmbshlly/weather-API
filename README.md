@@ -16,9 +16,9 @@ API endpoints to your application:
          {  
          &nbsp;     "cities": ["agra", "shimla"]  
          }  
-# register Table
+## register Table
 <img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/register_table.png">    
 <img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/register_schema.png">  
-# current_weather Table
+## current_weather Table
 <img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/current_weather_table.png">  
 <img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/current_weather_schema.png">  
