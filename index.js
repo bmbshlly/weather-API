@@ -26,7 +26,7 @@ app.use(express.json());
 
 
 // api routes
-app.get('/', (res) => { res.send('Hello World!') });
+app.get('/', (req, res) => { res.send('Hello World!'); });
 
 app.post('/registerUser', (req, res) => {
     const username = req.body.username;
@@ -34,10 +34,9 @@ app.post('/registerUser', (req, res) => {
     pool.query(`INSERT INTO register (username, password) VALUES ('${username}', '${password}')`, (err, res) => {
         if (err) {
             console.log(err.stack);
-        } else {
-            res.send("registered user");;
         }
     });
+    res.send("registered user");;
 });
 
 app.post('/setUserPreferences', (req, res) => {
@@ -63,7 +62,7 @@ app.get('/userWeatherData', async (req, res) => {
     else { res.send('no data found'); }
 });
 
-app.get('/updateWeatherData', (res) => {
+app.get('/updateWeatherData', (req, res) => {
     pool.query('SELECT city from current_weather', async (err, res) => {
         if (err) {
             console.log(err.stack);
