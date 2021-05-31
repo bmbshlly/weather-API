@@ -32,9 +32,7 @@ app.post('/registerUser', (req, res) => {
     const username = req.body.username;
     const password = md5(req.body.password);
     pool.query(`INSERT INTO register (username, password) VALUES ('${username}', '${password}')`, (err, res) => {
-        if (err) {
-            console.log(err.stack);
-        }
+        if (err) { console.log(err.stack); }
     });
     res.send("registered user");;
 });
@@ -43,12 +41,9 @@ app.post('/setUserPreferences', (req, res) => {
     const username = req.body.username;
     const preferences = JSON.stringify(req.body.preferences);
     pool.query(`UPDATE register SET preference = '${preferences}' WHERE username = '${username}'`, (err, res) => {
-        if (err) {
-            console.log(err.stack);
-        } else {
-            res.send("preference set");;
-        }
+        if (err) { console.log(err.stack); }
     });
+    res.send("preference set");
 });
 
 app.get('/userWeatherData', async (req, res) => {
