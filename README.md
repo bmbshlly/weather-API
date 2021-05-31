@@ -1,5 +1,5 @@
 # weather-API
-baseUrl = (https://money-planned.herokuapp.com/)  
+baseUrl = https://money-planned.herokuapp.com/  
 API endpoints to your application:
 1. POST - /updateWeatherData : This will update the latest weather data in the database.
 2. POST - /registerUser : Pass a json in the body of post method with username and password as objects.  
@@ -17,5 +17,5 @@ API endpoints to your application:
          &nbsp;     "cities": ["agra", "shimla"]  
          }
 
-[<img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/register_table.png" width="480" height="270">]
-[<img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/current_weather_table.png" width="480" height="270">]
+[<img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/register_table.png"]  
+[<img src="https://raw.githubusercontent.com/bmbshlly/weather-API/main/current_weather_table.png"]
