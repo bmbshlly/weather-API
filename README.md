@@ -1,5 +1,5 @@
 # weather-API
-baseUrl = https://money-planned.herokuapp.com/
+baseUrl = https://money-planned.herokuapp.com/  
 API endpoints to your application-
 1. POST - {baseUrl}/updateWeatherData : This will update the latest
 weather data in the database.
